@@ -40,21 +40,48 @@ body{
 .header__nav a:hover{background:rgba(148,163,184,.12)}
 
 .header__logo{justify-self:center; width:48px; height:48px; border-radius:50%; outline:1px dashed rgba(148,163,184,.35); outline-offset:4px; display:grid; place-items:center; color:var(--muted)}
-/* garante que a imagem do logotipo preencha o círculo */
 .header__logo img{width:100%; height:100%; object-fit:cover; border-radius:50%}
 
 .header__name{justify-self:end; font-weight:700; letter-spacing:.4px; color:var(--brand)}
 
 /* ===== SOBRE ===== */
-.section--sobre .sobre__grid{display:grid; grid-template-columns: 320px 1fr; gap:28px; align-items:start}
+.section--sobre .sobre__grid{
+  display: flex;             /* Flex em vez de grid */
+  gap: 28px;
+  align-items: flex-start;
+  flex-wrap: wrap;           /* Garante quebra de linha em telas pequenas */
+}
 
 /* Área de imagem do Dr. — com BORDA ARREDONDADA */
 .sobre__foto .placeholder--foto,
-.sobre__foto img{width:100%; aspect-ratio: 3 / 4; border-radius: var(--radius-l); box-shadow: var(--shadow); background:linear-gradient(135deg, rgba(34,211,238,.2), rgba(96,165,250,.12)); border:1px solid rgba(148,163,184,.16)}
+.sobre__foto img{
+  width:100%;
+  aspect-ratio: 3 / 4;
+  border-radius: var(--radius-l);
+  box-shadow: var(--shadow);
+  background:linear-gradient(135deg, rgba(34,211,238,.2), rgba(96,165,250,.12));
+  border:1px solid rgba(148,163,184,.16);
+}
 
-.sobre__texto h1{margin:0 0 10px; font-size:clamp(1.6rem,1.2rem + 1.2vw,2.2rem)}
+.sobre__texto h1{
+  margin:0 0 10px;
+  font-size:clamp(1.6rem,1.2rem + 1.2vw,2.2rem)
+}
+
 .sobre__dados{margin:16px 0 0; padding-left:18px; color:var(--muted)}
 .sobre__dados li{margin:6px 0}
+
+/* Responsividade: texto abaixo da imagem em mobile */
+@media (max-width: 768px) {
+  .section--sobre .sobre__grid {
+    flex-direction: column;
+    text-align: center;
+  }
+
+  .sobre__foto { order: 1; width: 100%; }
+  .sobre__texto { order: 2; }
+  .sobre__foto img { width: 100%; height: auto; }
+}
 
 /* ===== PROJETOS ===== */
 .projetos__grid{display:grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap:22px}
@@ -62,7 +89,6 @@ body{
 .project-card{background:linear-gradient(180deg, rgba(17,24,39,.9), rgba(17,24,39,.7)); border:1px solid rgba(148,163,184,.12); border-radius:var(--radius-m); overflow:hidden; display:flex; flex-direction:column; transition: transform .15s ease, box-shadow .15s ease}
 .project-card:hover{transform: translateY(-2px); box-shadow: var(--shadow)}
 
-/* Imagens dos projetos — com BORDA ARREDONDADA no conteúdo */
 .project-card__media{padding:12px 12px 0}
 .project-card__media .placeholder--card,
 .project-card__media img{width:100%; aspect-ratio: 16 / 10; border-radius: var(--radius-m); background:linear-gradient(135deg, rgba(52,211,153,.18), rgba(96,165,250,.12)); border:1px solid rgba(148,163,184,.16)}
@@ -75,17 +101,16 @@ body{
 
 .video__wrapper {
   display: flex;
-  gap: 20px;                 /* espaço entre os vídeos */
-  justify-content: center;   /* centraliza os vídeos */
-  flex-wrap: wrap;           /* quebra para baixo em telas pequenas */
+  gap: 20px;
+  justify-content: center;
+  flex-wrap: wrap;
   max-width: 1000px;
-  margin: 0 auto;
-  margin-bottom: 50px;
+  margin: 0 auto 50px auto;
 }
 
 .video__wrapper iframe {
   aspect-ratio: 9 / 16;
-  width: 315px;              /* largura fixa tipo shorts */
+  width: 315px;
   border-radius: var(--radius-l);
   border: 1px solid rgba(148,163,184,.16);
   overflow: hidden;
@@ -94,7 +119,7 @@ body{
 /* ===== CONTATOS ===== */
 .section--contatos{background:linear-gradient(180deg, rgba(17,24,39,.5), rgba(17,24,39,.2)); border-top:1px solid rgba(148,163,184,.1); border-bottom:1px solid rgba(148,163,184,.1)}
 .contatos__lista{display:grid; grid-template-columns: repeat(auto-fit, minmax(220px,1fr)); gap:12px; list-style:none; margin:0 0 18px; padding:0}
-/* contatos como links em bloco */
+
 .contatos__lista li > a.contato__item{
   display:flex; align-items:center; gap:10px;
   padding:12px;
@@ -123,15 +148,14 @@ body{
 }
 .contatos__acoes a {
   text-decoration: none;
-  border-radius: 8px;   /* cantos arredondados */
-  padding: 10px 20px;   /* espaço interno */
-  color: white;         /* cor do texto */
-  font-weight: bold;    /* texto em negrito */
-  transition: 0.3s;     /* suaviza animações */
+  border-radius: 8px;
+  padding: 10px 20px;
+  color: white;
+  font-weight: bold;
+  transition: 0.3s;
 }
-
 .contatos__acoes a:hover {
-  background-color: rgba(2,6,23,.6); /* muda cor no hover */
+  background-color: rgba(2,6,23,.6);
 }
 
 @media (hover:hover){
@@ -147,7 +171,6 @@ body{
   outline-offset:2px;
 }
 
-/* ícone centralizado + tamanhos */
 .contato__icon{
   display:grid; place-items:center;
   width:28px; height:28px; border-radius:8px;
@@ -155,18 +178,13 @@ body{
   color:#fff; opacity:.95;
 }
 .contato__icon i{ font-size:14px; line-height:1; }
-
-/* label do link */
 .contato__label{ font-weight:600; line-height:1.2; }
 
-/* variações (opcional) */
 .contato__icon--whatsapp{ background:linear-gradient(135deg,#25D366,#128C7E); }
 .contato__icon--email{ background:linear-gradient(135deg,#60a5fa,#93c5fd); }
 .contato__icon--instagram{ background:linear-gradient(135deg,#f58529,#dd2a7b); }
 .contato__icon--maps{ background:linear-gradient(135deg,#34a853,#4285f4); }
 
-/* respeito à redução de movimento */
 @media (prefers-reduced-motion: reduce){
   .contatos__lista li > a.contato__item{ transition:none; }
 }
-
