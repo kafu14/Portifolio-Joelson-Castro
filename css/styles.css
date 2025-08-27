@@ -45,11 +45,12 @@ body{
 .header__name{justify-self:end; font-weight:700; letter-spacing:.4px; color:var(--brand)}
 
 /* ===== SOBRE ===== */
+/* Estilo padrão para desktop */
 .section--sobre .sobre__grid{
-  display: flex;             /* Flex em vez de grid */
+  display: grid;
+  grid-template-columns: 320px 1fr; /* imagem + texto lado a lado */
   gap: 28px;
-  align-items: flex-start;
-  flex-wrap: wrap;           /* Garante quebra de linha em telas pequenas */
+  align-items: start;
 }
 
 /* Área de imagem do Dr. — com BORDA ARREDONDADA */
@@ -71,15 +72,17 @@ body{
 .sobre__dados{margin:16px 0 0; padding-left:18px; color:var(--muted)}
 .sobre__dados li{margin:6px 0}
 
-/* Responsividade: texto abaixo da imagem em mobile */
+/* ===== RESPONSIVIDADE MOBILE ===== */
 @media (max-width: 768px) {
   .section--sobre .sobre__grid {
-    flex-direction: column;
-    text-align: center;
+    display: flex;           /* muda para flex para empilhar elementos */
+    flex-direction: column;  /* imagem em cima, texto embaixo */
+    align-items: center;     /* centraliza conteúdo */
+    gap: 20px;               /* espaçamento entre imagem e texto */
   }
 
   .sobre__foto { order: 1; width: 100%; }
-  .sobre__texto { order: 2; }
+  .sobre__texto { order: 2; width: 100%; text-align: center; }
   .sobre__foto img { width: 100%; height: auto; }
 }
 
